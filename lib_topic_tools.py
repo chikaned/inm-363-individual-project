@@ -1,33 +1,15 @@
-
-#import gensim libraries
-from types import TracebackType
-from gensim.corpora import Dictionary
-from gensim.models import LsiModel, LdaModel
-from gensim.models.coherencemodel import CoherenceModel
-
 #import nltk libraries
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-#import clustering functions
-from sklearn.manifold import TSNE
-
-#import visualisation libs
-import plotly.express as px
-from tqdm import tqdm
-
 #import DSA libs
 import pandas as pd
 import numpy as np
-import multiprocessing
-import re
 from numpy import absolute
 
 #import octis libs
 from octis.dataset.dataset import Dataset as OctisDataset
 from octis.evaluation_metrics.diversity_metrics import TopicDiversity, InvertedRBO
-from octis.evaluation_metrics.topic_significance_metrics import KL_uniform 
-from octis.evaluation_metrics.similarity_metrics  import RBO, PairwiseJaccardSimilarity 
 from octis.evaluation_metrics.coherence_metrics import Coherence
 
 #import visualisation libs
