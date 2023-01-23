@@ -16,10 +16,6 @@ from textblob import TextBlob
 import spacy
 import emoji
 
-#import custom libs
-from lib_text_tools_customdicts import preep
-
-
 # Load the spacy model
 nlp = spacy.load("en_core_web_sm") #en_core_web_trf #en_core_web_sm
 
@@ -27,7 +23,7 @@ nlp = spacy.load("en_core_web_sm") #en_core_web_trf #en_core_web_sm
 def clean_tweet(tweet):
     """
 
-    Removes undesriable elements from text often foudn in social media posts
+    Removes undesirable elements from text often found in social media posts
 
     """
     if type(tweet) == float:

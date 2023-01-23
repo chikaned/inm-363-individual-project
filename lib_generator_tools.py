@@ -22,7 +22,12 @@ from lib_rnn_tools import *
 from lib_embedding_shallow import *
 
 
-################################################################################################################################
+"""
+Library for data-preprocesing and dataloaders for neural text and topic-text classifiers
+
+**********************************************************************************************************************************************
+
+"""
 
 class CustomOctisDataset():
     """

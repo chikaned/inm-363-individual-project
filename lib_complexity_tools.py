@@ -20,6 +20,7 @@ from lib_rnn_tools import *
 
 
 """
+
 Library for getting prediction and training times for shallow and deep models
 
 **********************************************************************************************************************************************
@@ -29,6 +30,8 @@ Library for getting prediction and training times for shallow and deep models
 def ReadPickle(file_path):
     """
     Read a pickle file in the specified location
+
+    
     """
     
     tmp_file = open(file_path, 'rb')
@@ -52,28 +55,25 @@ class ComplexityTools():
         
         print("\nWarming up GPU...\n")
         
-        # Only this extra line of code is required to use oneDNN Graph
+        #enable onednn
         torch.jit.enable_onednn_fusion(True)
 
-        # sample input should be of the same shape as expected inputs
+        #get random input
         sample_input = [torch.rand(32, 3, 224, 224)]
 
-        # Using resnet50 from TorchVision in this example for illustrative purposes,
-
-        # but the line below can indeed be modified to use custom models as well.
+        #use resnet
         model = getattr(torchvision.models, "resnet50")().eval()
 
-        # Tracing the model with example input
+        #trace model with input
         traced_model = torch.jit.trace(model, sample_input)
 
-        # Invoking torch.jit.freeze
+        #freeze
         traced_model = torch.jit.freeze(traced_model)
 
+        #execute warm-ups
         with torch.no_grad():
-            # a couple of warmup runs
             traced_model(*sample_input)
             traced_model(*sample_input)
-            # speedup would be observed after warmup runs
             traced_model(*sample_input)
         
         del(traced_model)
@@ -141,7 +141,7 @@ class ComplexityTools():
     def CreateDummyIter(self, dummy_len = 25600, vocab_size = 12180, seq_len = 1000, batch_size = 32):     
         """
 
-        Create dummy iterator for neural model evaluation
+        Create dummy iterator for neural network evaluation using 
         
         """
         
@@ -400,7 +400,7 @@ class ComplexityTools():
         """
         
         Wrapper function for neural model training and evaluation to get prediction, backpropagation and optimziation times
-        with either CPU or GPU processing
+        with either CPU or GPU processing in milli
         
         """
         
@@ -476,8 +476,6 @@ class ComplexityTools():
         
         #get tokenized texts
         docs = X
-
-        #specify hyperparams
 
         #static vars
         max_seq_length = 384 #embedding length

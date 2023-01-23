@@ -124,16 +124,16 @@ def GetYPredNN(network=None, X=None, y=None, z=None, valid_iter=None,device='cud
             batch_text, batch_topics, batch_labels = batch
             batch_topics = torch.autograd.Variable(batch_topics).float()
             batch_topics = batch_topics.to(device)
+            sents, _ = batch_text
+            sents = sents.to(device)
+            output = network(sents, None, batch_topics)
         else:
             batch_text, batch_labels = batch 
-        sents, _ = batch_text
-        sents = sents.to(device)
+            sents, _ = batch_text
+            sents = sents.to(device)
+            output = network(sents)
         labels = batch_labels.to(device)
-
-
-        #get logits
-        output = network(sents)
-    
+   
         #convert to predictions
         _, y_pred = torch.max(output.data, 1)
 
@@ -173,7 +173,7 @@ class NetModeller():
     def NetworkTrain(self):
         """
 
-        Trains a trainable network and returns mean loss score
+        Trains a neural network and returns scores
         
         """
         
